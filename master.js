@@ -541,82 +541,64 @@ function initNavbar() {
 }
 
 // ============================================================================
-// MOBILE MENU - Slick open/close
+// MOBILE MENU - Slick open/close (FIXED - No Dependencies)
 // ============================================================================
 
 function initMenu() {
   const menuButton = document.querySelector('.menu-button');
   const navbarMenu = document.querySelector('.navbar-menu');
+
+  if (!menuButton || !navbarMenu) {
+    console.error('Menu elements not found!');
+    return;
+  }
+
   let isOpen = false;
 
-  if (!menuButton || !navbarMenu) return;
-
-  menuButton.addEventListener('click', (e) => {
+  const clickHandler = (e) => {
+    e.preventDefault();
     e.stopPropagation();
+
     isOpen = !isOpen;
 
     if (isOpen) {
-      // Open
+      // Open menu
       navbarMenu.style.display = 'block';
-      
-      gsap.to(navbarMenu, {
-        x: 0,
-        opacity: 1,
-        duration: 0.4,
-        ease: 'expo.out',
-      });
-
-      gsap.to('main, .hero-section', {
-        scale: 0.96,
-        filter: 'blur(8px) brightness(0.7)',
-        duration: 0.4,
-        ease: 'expo.out',
-      });
-
       menuButton.classList.add('w--open');
-      lenis?.stop();
       document.body.style.overflow = 'hidden';
     } else {
-      // Close
-      gsap.to(navbarMenu, {
-        x: '-100%',
-        opacity: 0,
-        duration: 0.35,
-        ease: 'expo.in',
-        onComplete: () => {
-          navbarMenu.style.display = 'none';
-        },
-      });
-
-      gsap.to('main, .hero-section', {
-        scale: 1,
-        filter: 'blur(0px) brightness(1)',
-        duration: 0.35,
-        ease: 'expo.in',
-      });
-
+      // Close menu
+      navbarMenu.style.display = 'none';
       menuButton.classList.remove('w--open');
-      lenis?.start();
       document.body.style.overflow = '';
     }
-  });
+  };
+
+  // Add both touch and click events
+  menuButton.addEventListener('click', clickHandler);
+  menuButton.addEventListener('touchstart', clickHandler, { passive: false });
 
   // Close on link click
   navbarMenu.querySelectorAll('a:not(.dropdown-toggle)').forEach((link) => {
-    link.addEventListener('click', () => {
-      if (isOpen) menuButton.click();
+    link.addEventListener('click', (e) => {
+      if (isOpen) {
+        // Just close the menu. The link will navigate normally.
+        clickHandler(e);
+      }
     });
   });
 
   // Close on escape
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isOpen) menuButton.click();
+    if (e.key === 'Escape' && isOpen) {
+      clickHandler(e);
+    }
   });
 
   // Close on outside click
   document.addEventListener('click', (e) => {
     if (isOpen && !navbarMenu.contains(e.target) && !menuButton.contains(e.target)) {
-      menuButton.click();
+      clickHandler(e);
     }
   });
 }
@@ -809,7 +791,7 @@ async function initPage() {
     animatePageHeadings();
     initScrollAnimations();
     initNavbar();
-    initMenu();
+    // initMenu(); // <-- MOVED to DOMContentLoaded
     initButtonHovers();
   });
 }
@@ -819,6 +801,7 @@ async function initPage() {
 // ============================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+  initMenu(); // <-- MOVED HERE: Runs immediately, no dependencies
   setupPageTransitions();
   initPage();
 });
