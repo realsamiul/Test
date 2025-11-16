@@ -1,20 +1,32 @@
 /**
- * - Hardware Template - Production Master Animation System
- * - Optimized for mobile-first, buttery smooth scrolling
- * - All pages analyzed from hardware-technology-consulting-template.webflow.io
- * - — Phase 2 Update —
- * - Added error boundary for CDN import failures.
- * -----
+ * - Hardware Template - Production Master Animation System (corrected)
+ * - Fixes applied:
+ *   1) Made the global error handler remove the loading class for any runtime error so the page doesn't stay stuck.
+ *   2) Guarded DOM initialization calls (initMenu, setupPageTransitions, initPage) so missing helpers don't throw.
+ *   3) Fixed selector typos: replaced em-dash class names (— / \u2014) with the actual three-hyphen names used in the HTML (---).
+ *   4) Ensures core animation inits (Lenis, ScrollTrigger animations, SplitText headings, hero entrance) run defensively.
+ *
+ * Notes:
+ * - This file is an ES module and must be included in your HTML with a module script tag:
+ *     <script type="module" src="master.js"></script>
+ *   Place it near the end of <body>.
+ *
+ * - If you still get errors after adding this file, open DevTools Console and paste the first error here; I will point to the exact line to fix.
  */
 
 window.addEventListener('error', (e) => {
-  if (e.message.includes('Failed to fetch') || e.message.includes('CDN')) {
-    console.warn('Animation library failed to load. Site will work but animations disabled.');
+  // Unblock the page if any runtime error occurs (so content is visible even if animations fail).
+  // Log the error for debugging.
+  try {
+    console.warn('Animation system error:', e && (e.message || e.error || e));
+  } catch (err) {
+    // ignore
+  } finally {
     document.body.classList.remove('loading');
   }
 });
 
-// Import from local '/lib/' folder
+// Import from local '/lib/' folder (these files are included in the repo)
 import { gsap } from './lib/gsap-core.js';
 import { ScrollTrigger } from './lib/ScrollTrigger.js';
 import { SplitText } from './lib/SplitText.js';
@@ -29,20 +41,20 @@ gsap.registerPlugin(ScrollTrigger, SplitText, Flip);
 
 const CONFIG = {
   lenis: {
-    duration: 1.2,        // Slightly slower on mobile for smoother feel
+    duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     orientation: 'vertical',
     gestureOrientation: 'vertical',
     smoothWheel: true,
-    smoothTouch: true,    // Enable smooth touch scrolling on mobile
-    wheelMultiplier: 0.7, // Slower wheel scroll (more inertia)
-    touchMultiplier: 1.8, // More inertia on mobile touch scroll
+    smoothTouch: true,
+    wheelMultiplier: 0.7,
+    touchMultiplier: 1.8,
     infinite: false,
-    lerp: 0.15,           // Increased inertia (slower scroll) for a buttery feel
+    lerp: 0.15,
   },
   pageTransition: {
-    duration: 0.5,        // Fast transitions
-    ease: 'expo.inOut',   // Premium easing
+    duration: 0.5,
+    ease: 'expo.inOut',
   },
   heroEntrance: {
     duration: 1.0,
@@ -59,28 +71,34 @@ const CONFIG = {
 let lenis;
 
 function initLenis() {
-  lenis = new Lenis(CONFIG.lenis);
+  try {
+    lenis = new Lenis(CONFIG.lenis);
 
-  // Sync with GSAP ScrollTrigger
-  lenis.on('scroll', ScrollTrigger.update);
+    // Sync with GSAP ScrollTrigger
+    if (lenis && typeof lenis.on === 'function') {
+      lenis.on('scroll', ScrollTrigger.update);
+    }
 
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
+    gsap.ticker.add((time) => {
+      lenis && typeof lenis.raf === 'function' && lenis.raf(time * 1000);
+    });
 
-  gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(0);
 
-  // Prevent scroll interference
-  ScrollTrigger.defaults({
-    markers: false,
-    scroller: document.body,
-  });
+    // Prevent scroll interference
+    ScrollTrigger.defaults({
+      markers: false,
+      scroller: document.body,
+    });
 
-  // Prevent any scroll blocking
-  ScrollTrigger.config({
-    autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
-    limitCallbacks: true,
-  });
+    // Prevent any scroll blocking
+    ScrollTrigger.config({
+      autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
+      limitCallbacks: true,
+    });
+  } catch (err) {
+    console.warn('Lenis init failed:', err);
+  }
 }
 
 // ============================================================================
@@ -96,12 +114,16 @@ function animateHeroEntrance() {
   // 1. Hero background image
   const heroBg = document.querySelector('.hero-bg, .hero-section img.hero-bg, .hero-bg-wrap img');
   if (heroBg) {
-    tl.to(heroBg, {
-      opacity: 1,
-      scale: 1,
-      duration: 1.6,
-      ease: 'power2.out',
-    }, 0);
+    tl.to(
+      heroBg,
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 1.6,
+        ease: 'power2.out',
+      },
+      0
+    );
   }
 
   // 2. Hero content containers (all variants)
@@ -130,14 +152,15 @@ function animateHeroEntrance() {
   }
 
   // 4. Main hero headings - letter by letter
+  // NOTE: fixed selectors to match HTML classnames (three hyphens '---')
   const heroHeadings = document.querySelectorAll(
-    '.hero-section h1, .hero-section h2, .hero-section .heading—h1, .hero-section .heading—h2, .hero-section .heading—h3'
+    '.hero-section h1, .hero-section h2, .hero-section .heading---h1, .hero-section .heading---h2, .hero-section .heading---h3'
   );
 
   heroHeadings.forEach((heading, index) => {
     if (heading.closest('.snippet-link') || heading.querySelector('.char')) return;
 
-    const split = new SplitText(heading, { 
+    const split = new SplitText(heading, {
       type: 'words,chars',
       wordsClass: 'word',
       charsClass: 'char',
@@ -163,7 +186,7 @@ function animateHeroEntrance() {
   });
 
   // 5. Hero paragraphs/lead text
-  const heroText = document.querySelectorAll('.hero-section .heading—h5, .hero-section .text—lead');
+  const heroText = document.querySelectorAll('.hero-section .heading---h5, .hero-section .text---lead');
   if (heroText.length) {
     tl.fromTo(
       heroText,
@@ -203,17 +226,18 @@ function animateHeroEntrance() {
 // ============================================================================
 
 function animatePageHeadings() {
+  // Fixed selectors to match HTML classes (three hyphens)
   const headings = document.querySelectorAll(
     'h1:not(.hero-section h1), h2:not(.hero-section h2), h3:not(.hero-section h3), ' +
-    '.heading—h1:not(.hero-section .heading—h1), ' +
-    '.heading—h2:not(.hero-section .heading—h2), ' +
-    '.heading—h3:not(.hero-section .heading—h3)'
+      '.heading---h1:not(.hero-section .heading---h1), ' +
+      '.heading---h2:not(.hero-section .heading---h2), ' +
+      '.heading---h3:not(.hero-section .heading---h3)'
   );
 
   headings.forEach((heading) => {
     if (heading.querySelector('.char') || heading.closest('.snippet-link')) return;
 
-    const split = new SplitText(heading, { 
+    const split = new SplitText(heading, {
       type: 'words,chars',
       wordsClass: 'word',
       charsClass: 'char',
@@ -248,7 +272,11 @@ function animatePageHeadings() {
 // ============================================================================
 
 function initScrollAnimations() {
-  ScrollTrigger.getAll().forEach((t) => t.kill());
+  try {
+    ScrollTrigger.getAll().forEach((t) => t.kill());
+  } catch (err) {
+    // ignore if ScrollTrigger not ready
+  }
 
   // SECTIONS - Subtle fade in
   gsap.utils.toArray('.section').forEach((section) => {
@@ -272,7 +300,7 @@ function initScrollAnimations() {
   gsap.utils.toArray('.image-wrapper, .captioned-image-wrapper, .image-pair').forEach((wrapper) => {
     const images = wrapper.querySelectorAll('.image-fill, img');
 
-    images.forEach((image, index) => {
+    images.forEach((image) => {
       gsap.fromTo(
         image,
         { scale: 1.15, opacity: 0 },
@@ -348,23 +376,58 @@ function initScrollAnimations() {
   });
 }
 
-// Initialize page transitions, navbar, menu, etc.
-// (Add other functions here, such as initNavbar, initMenu, initButtonHovers, etc.)
+// ============================================================================
+// Initialization - guarded and defensive
+// ============================================================================
+
+function safeRun(fn) {
+  try {
+    typeof fn === 'function' && fn();
+  } catch (err) {
+    console.warn('Safe-run caught error:', err);
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   requestAnimationFrame(() => {
-    initMenu();
-    setupPageTransitions();
-    initPage();
+    try {
+      // Initialize Lenis first (if present)
+      safeRun(initLenis);
+
+      // Initialize Scroll/GSAP animations
+      safeRun(() => {
+        // Run important anim initializers defensively
+        safeRun(animateHeroEntrance);
+        safeRun(animatePageHeadings);
+        safeRun(initScrollAnimations);
+      });
+
+      // Call page-specific helpers if they exist (do not throw if missing)
+      if (typeof initMenu === 'function') {
+        safeRun(initMenu);
+      }
+      if (typeof setupPageTransitions === 'function') {
+        safeRun(setupPageTransitions);
+      }
+      if (typeof initPage === 'function') {
+        safeRun(initPage);
+      }
+
+      // Ensure page isn't stuck in loading state even if some part failed
+      document.body.classList.remove('loading');
+    } catch (err) {
+      console.warn('Initialization error:', err);
+      document.body.classList.remove('loading');
+    }
   });
 });
 
 // Pause Lenis when page hidden
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
-    lenis?.stop();
+    lenis?.stop && lenis.stop();
   } else {
-    lenis?.start();
+    lenis?.start && lenis.start();
   }
 });
 
@@ -374,6 +437,10 @@ window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
     CONFIG.isMobile = window.innerWidth < 768;
-    ScrollTrigger.refresh();
+    try {
+      ScrollTrigger.refresh();
+    } catch (err) {
+      // ignore
+    }
   }, 250);
 });
