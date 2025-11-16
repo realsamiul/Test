@@ -5,13 +5,7 @@
  *   2) Guarded DOM initialization calls (initMenu, setupPageTransitions, initPage) so missing helpers don't throw.
  *   3) Fixed selector typos: replaced em-dash class names (— / \u2014) with the actual three-hyphen names used in the HTML (---).
  *   4) Ensures core animation inits (Lenis, ScrollTrigger animations, SplitText headings, hero entrance) run defensively.
- *
- * Notes:
- * - This file is an ES module and must be included in your HTML with a module script tag:
- *     <script type="module" src="master.js"></script>
- *   Place it near the end of <body>.
- *
- * - If you still get errors after adding this file, open DevTools Console and paste the first error here; I will point to the exact line to fix.
+ * - Added: initMenu function to handle navigation interactions previously managed by Webflow JS.
  */
 
 window.addEventListener('error', (e) => {
@@ -63,6 +57,105 @@ const CONFIG = {
   },
   isMobile: window.innerWidth < 768,
 };
+
+// ============================================================================
+// NAVIGATION INITIALIZATION - Custom function to replace Webflow JS
+// ============================================================================
+
+function initMenu() {
+  const nav = document.querySelector('.w-nav');
+  const menuButton = document.querySelector('.w-nav-button');
+  const menu = document.querySelector('.w-nav-menu');
+  const navOverlay = document.querySelector('.w-nav-overlay'); // Check for overlay style
+  const collapsePoint = getComputedStyle(nav).getPropertyValue('--_navbar-navbar-collapse-point') || '991.98px'; // Use CSS var or default
+  let isMobileView = window.innerWidth <= parseFloat(collapsePoint); // Initial state check
+
+  if (!nav || !menuButton || !menu) {
+    console.warn('Navigation elements (.w-nav, .w-nav-button, .w-nav-menu) not found for initMenu');
+    return;
+  }
+
+  // Function to handle state changes
+  function updateMenuState(isOpen) {
+    menuButton.classList.toggle('w--open', isOpen);
+    // The menu itself might be controlled by CSS based on the button state or an overlay attribute
+    // Option 1: Toggle class on menu (common Webflow pattern)
+    menu.classList.toggle('w--nav-menu-open', isOpen); // Add a custom class for styling if needed, or use .w--open
+
+    // Option 2: Toggle attribute on a parent, often the body or the nav itself, for overlay style
+    if (navOverlay) {
+       nav.setAttribute('data-nav-menu-open', isOpen ? 'true' : null); // Use attribute for overlay style
+    }
+    // Option 3: Toggle attribute directly on menu if CSS uses [data-nav-menu-open] on the menu element
+    // menu.setAttribute('data-nav-menu-open', isOpen ? 'true' : null);
+
+    // Ensure Lenis scrolling is disabled/enabled based on menu state (important for overlay menus)
+    if (lenis) {
+      if (isOpen) {
+        lenis.stop(); // Stop Lenis when menu is open (especially overlay)
+      } else {
+        lenis.start(); // Resume Lenis when menu closes
+      }
+    }
+  }
+
+  // Click handler for the menu button
+  menuButton.addEventListener('click', (e) => {
+    e.preventDefault(); // Prevent default button behavior if needed
+    const isOpen = menuButton.classList.contains('w--open');
+    updateMenuState(!isOpen);
+  });
+
+  // Close menu when clicking a link inside it (common UX)
+  menu.querySelectorAll('a.w-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (isMobileView) { // Only close on mobile/tablet views where it's likely a dropdown/overlay
+        updateMenuState(false);
+      }
+    });
+  });
+
+  // Close menu when clicking outside the navigation area (overlay style or dropdown)
+  document.addEventListener('click', (e) => {
+    if (
+      isMobileView && // Only relevant on mobile view
+      !nav.contains(e.target) && // Click was outside the nav container
+      menuButton.classList.contains('w--open') // Menu is currently open
+    ) {
+      updateMenuState(false);
+    }
+  });
+
+  // Optional: Close menu on resize if switching from mobile to desktop view
+  window.addEventListener('resize', () => {
+    const newIsMobileView = window.innerWidth <= parseFloat(collapsePoint);
+    if (isMobileView && !newIsMobileView && menuButton.classList.contains('w--open')) {
+      // Went from mobile to desktop, close the menu if it was open
+      updateMenuState(false);
+    }
+    isMobileView = newIsMobileView; // Update state variable
+  });
+
+  console.log("initMenu: Navigation initialized.");
+}
+
+// ============================================================================
+// PAGE INITIALIZATION - Placeholder for page-specific logic (if needed later)
+// ============================================================================
+
+function initPage() {
+  // Add any specific page initialization logic here if required later.
+  console.log("initPage: Page-specific initialization placeholder.");
+}
+
+// ============================================================================
+// PAGE TRANSITIONS - Placeholder for page transition logic (if needed later)
+// ============================================================================
+
+function setupPageTransitions() {
+  // Add any page transition logic here if required later.
+  console.log("setupPageTransitions: Page transition setup placeholder.");
+}
 
 // ============================================================================
 // LENIS SMOOTH SCROLL - Never interrupts, pure glide
@@ -402,19 +495,14 @@ document.addEventListener('DOMContentLoaded', () => {
         safeRun(initScrollAnimations);
       });
 
-      // Call page-specific helpers if they exist (do not throw if missing)
-      if (typeof initMenu === 'function') {
-        safeRun(initMenu);
-      }
-      if (typeof setupPageTransitions === 'function') {
-        safeRun(setupPageTransitions);
-      }
-      if (typeof initPage === 'function') {
-        safeRun(initPage);
-      }
+      // Call page-specific helpers (now defined within this file)
+      safeRun(initMenu); // Call the newly defined initMenu
+      safeRun(setupPageTransitions); // Call the placeholder
+      safeRun(initPage); // Call the placeholder
 
       // Ensure page isn't stuck in loading state even if some part failed
       document.body.classList.remove('loading');
+      console.log("Master JS initialization complete.");
     } catch (err) {
       console.warn('Initialization error:', err);
       document.body.classList.remove('loading');
