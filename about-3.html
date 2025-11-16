@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>M0NARQ - The M0NARQ Processing Pipeline</title>
+    <!-- Meta Description -->
+    <meta content="From a 12-Page bank Account Opening Form (AOF) with handwritten sections and NID card attachments to validated JSON in 15 seconds. This is the M0NARQ data flow." name="description">
+    <!-- Open Graph Tags -->
+    <meta content="M0NARQ - The M0NARQ Processing Pipeline" property="og:title">
+    <meta content="From a 12-Page bank Account Opening Form (AOF) with handwritten sections and NID card attachments to validated JSON in 15 seconds. This is the M0NARQ data flow." property="og:description">
+    <!-- Twitter Card Tags -->
+    <meta content="M0NARQ - The M0NARQ Processing Pipeline" property="twitter:title">
+    <meta content="From a 12-Page bank Account Opening Form (AOF) with handwritten sections and NID card attachments to validated JSON in 15 seconds. This is the M0NARQ data flow." property="twitter:description">
+    <meta property="og:type" content="website">
+    <meta content="summary_large_image" name="twitter:card">
+    <!-- Viewport Meta -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" name="viewport">
+    <meta content="Webflow" name="generator">
+    <!-- LOCAL CSS - IN ROOT -->
+    <link href="hardware-technology-consulting-template.webflow.shared.93bb2e508.css" rel="stylesheet" type="text/css">
+    <!-- LOCAL FONTS - IN ROOT -->
+    <link href="fonts.css" rel="stylesheet" type="text/css">
+    <!-- Icons - IN ROOT -->
+    <link href="690016b2b45a367a37815563_favicon.png" rel="shortcut icon" type="image/x-icon">
+    <link href="690016b743eebae2ac50aeee_webclip.png" rel="apple-touch-icon">
+    <!-- === Optimizations (Phase 2) === -->
+    <!-- Preconnect to JS CDN -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#000000">
+    <!-- Optimizations & Animation Styles -->
+    <style>
+        /* Font smoothing */
+        body {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Split text styling */
+        .char {
+            display: inline-block;
+            transform-origin: bottom center;
+            will-change: transform, opacity;
+        }
+        .word {
+            display: inline-block;
+            white-space: nowrap;
+        }
+        /* Hero images start hidden */
+        .hero-bg {
+            opacity: 0;
+        }
+        /* Performance optimizations */
+        main, .hero-section, .button, .image-fill {
+            will-change: transform, opacity;
+        }
+        /* Mobile button sizing - Google standards (48px minimum) */
+        @media (max-width: 767px) {
+            .button {
+                min-height: 48px !important;
+                min-width: 48px !important;
+                padding: 14px 20px !important;
+                font-size: 16px !important; /* Prevents iOS zoom */
+            }
+            .menu-button {
+                min-width: 48px !important;
+                min-height: 48px !important;
+                padding: 12px !important;
+            }
+            /* Form inputs - prevent iOS zoom */
+            input, textarea, select {
+                font-size: 16px !important;
+            }
+            /* Touch-friendly links */
+            a:not(.w-nav-brand) {
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+        }
+        /* Smooth transitions */
+        main, .hero-section {
+            transition: none;
+        }
+        /* Prevent layout shift */
+        img, .image-fill {
+            content-visibility: auto;
+        }
+        /* Mobile menu optimizations */
+        .navbar-menu {
+            -webkit-overflow-scrolling: touch;
+        }
+        /* Accessibility: Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        /* Search modal styling */
+        .search-modal-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+            display: none;
+        }
+        .search-modal-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .search-modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            background-color: #1a1a1a;
+            padding: 40px;
+            border-radius: 4px;
+        }
+        .search-modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            font-size: 18px;
+            background-color: #2d2d2d;
+            border: none;
+            color: white;
+            border-radius: 4px;
+        }
+        .search-modal-button {
+            background-color: #0c0c0c;
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .search-modal-button:hover {
+            background-color: #1a1a1a;
+        }
+    </style>
+</head>
+<body class="loading">
+    <!-- === Main Page Content === -->
+    <main class="main-content">
+        <!-- Global Navbar -->
+        <div data-w-id="3d7510a3-dfc6-473a-79bd-c26c6d7bf580" 
+             data-animation="default" 
+             data-collapse="medium" 
+             data-duration="400" 
+             data-easing="ease" 
+             data-easing2="ease" 
+             role="banner" 
+             class="navbar w-nav">
+            <div class="navbar-bg"></div>
+            <div class="main-container navbar-container">
+                <div class="navbar-row">
+                    <a href="index.html" class="nav-logo-link w-inline-block">
+                        <!-- LOGO: Fixed Path - IN ROOT -->
+                        <img src="68ec2baa30941d8fb5f2704f_hardware-logo.svg" 
+                             alt="M0NARQ Logo" 
+                             class="nav-logo">
+                    </a>
+                    <div class="navigation-wrap">
+                        <nav role="navigation" class="navbar-menu w-nav-menu">
+                            <div class="nav-links">
+                                <!-- Page 1 -->
+                                <div class="nav-link-wrap">
+                                    <a href="index.html" class="dropdown-link">The Tk 32,000 Cr Problem</a>
+                                </div>
+                                <!-- Page 2 -->
+                                <div class="nav-link-wrap">
+                                    <a href="home-2.html" class="dropdown-link">Our "Two-Bucket" Solution</a>
+                                </div>
+                                <!-- Page 3 -->
+                                <div class="nav-link-wrap">
+                                    <a href="about-3.html" aria-current="page" class="dropdown-link w--current">The M0NARQ Pipeline</a>
+                                </div>
+                                <!-- Page 4 -->
+                                <div class="nav-link-wrap">
+                                    <a href="services-1.html" class="dropdown-link">Authoritative Tech Stack</a>
+                                </div>
+                                <!-- Page 5 -->
+                                <div class="nav-link-wrap">
+                                    <a href="services-2.html" class="dropdown-link">Competitive Analysis</a>
+                                </div>
+                                <!-- Page 6 -->
+                                <div class="nav-link-wrap">
+                                    <a href="services-3.html" class="dropdown-link">The Tk 5,000 Cr Market</a>
+                                </div>
+                                <!-- Page 7 -->
+                                <div class="nav-link-wrap">
+                                    <a href="customers.html" class="dropdown-link">Proof: The 5-Cheque Demo</a>
+                                </div>
+                                <!-- Page 8 -->
+                                <div class="nav-link-wrap">
+                                    <a href="pricing.html" class="dropdown-link">The Financial Case (ROI)</a>
+                                </div>
+                                <!-- Page 9 -->
+                                <div class="nav-link-wrap">
+                                    <a href="about-1.html" class="dropdown-link">The Execution Plan & The Ask</a>
+                                </div>
+                                <!-- Page 10 -->
+                                <div class="nav-link-wrap">
+                                    <a href="contact.html" class="dropdown-link">Contact & Next Steps</a>
+                                </div>
+                            </div>
+                            <form action="search.html" class="navbar-menu-search w-form">
+                                <input class="form-input w-input" maxlength="256" name="query" placeholder="Search…" type="search" id="search-2" required=""/>
+                                <input type="submit" class="hide w-button" value="Search"/>
+                            </form>
+                            <div class="navbar-mobile-bg"></div>
+                        </nav>
+                    </div>
+                    <div class="navbar-right-contents">
+                        <div class="trigger-search">
+                            <div>Search</div>
+                        </div>
+                        <div class="menu-button w-nav-button">
+                            <div class="menu-button-icon-wrapper">
+                                <img src="68ec3bdc9428749e735f3dbd_interface-icon-menu.svg" 
+                                     alt="show menu" 
+                                     class="menu-button-icon">
+                                <img src="68ec3bdc038a532eb6cf33c0_interface-icon-cross.svg" 
+                                     alt="dismiss" 
+                                     class="menu-button-icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page 3: Hero -->
+        <section class="hero-section">
+            <div class="hero-bg-wrap">
+                <!-- IMAGE: Fixed Path (Placeholder) - IN ROOT -->
+                <img class="hero-bg" 
+                     src="https://via.placeholder.com/3072x2048/1a1a1a/ffffff?text=AOF+Pipeline+Hero" 
+                     alt="M0NARQ AOF Processing Pipeline" 
+                     style="opacity: 0;"
+                     sizes="(max-width: 3072px) 100vw, 3072px">
+            </div>
+            <div class="hero-4-content" style="opacity: 0;">
+                <div class="hero-content">
+                    <div class="title hero-1-title">
+                        <div class="dot-title">
+                            <div class="dot inside-title"></div>
+                            <div class="badge-text">The M0NARQ Pipeline</div>
+                        </div>
+                        <h1 class="heading---h2" data-anim-split-text>
+                            <span class="text-span">The Pipeline in Action:</span> From a 12-Page PDF to Validated JSON in 15 Seconds.
+                        </h1>
+                        <p class="text---lead" data-anim-fade-up style="max-width: 800px;">
+                            Our architecture is not theoretical. Here is the step-by-step data flow for a <strong>12-page bank Account Opening Form (AOF)</strong> with handwritten sections and NID card attachments—a process that manually takes 50 minutes.
+                        </p>
+                    </div>
+                </div>
+                <div id="w-node-_6e93f8a0-7caf-d67f-5e7f-1bf614f2da2c-87a111b0" class="buttons align-bottom-right">
+                    <a data-wf--button--variant="atop-blurred-bg" 
+                       href="services-1.html" 
+                       class="button w-variant-cf98775e-6aa8-d22e-4d45-019174967c2f w-inline-block" 
+                       data-anim-fade-up>
+                        <div class="button-icon-text-wrap">
+                            <div class="button-text">See Authoritative Tech Stack</div>
+                        </div>
+                        <div class="button-icon-wrap">
+                            <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" 
+                                 alt="arrow up right" 
+                                 class="button-icon">
+                            <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" 
+                                 alt="arrow up right" 
+                                 class="button-icon">
+                        </div>
+                        <div class="button-hover-element-wrap">
+                            <div class="button-hover-element"></div>
+                        </div>
+                    </a>
+                    <a href="about-3.html#" class="button bg-brand w-inline-block w-lightbox" data-anim-fade-up>
+                        <div class="button-text">Watch intro</div>
+                        <div class="button-icon-wrap">
+                            <img src="68ec2c585c3ba6dd6f00ec9d_interface-icon-play.svg" 
+                                 alt="play media" 
+                                 class="button-icon">
+                            <img src="68ec2c585c3ba6dd6f00ec9d_interface-icon-play.svg" 
+                                 alt="play media" 
+                                 class="button-icon">
+                        </div>
+                        <div class="button-hover-element-wrap">
+                            <div class="button-hover-element"></div>
+                        </div>
+                        <script type="application/json" class="w-json">{
+                          "items": [],
+                          "group": ""
+                        }</script>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Page 3: Process Steps -->
+        <section class="section title-top-section no-border" data-anim-fade-up>
+            <div class="main-container">
+                <div class="title-top-section">
+                    <div class="heading---h2" data-anim-split-text>The 12-Page Form Processing Flow</div>
+                    <div class="process-wide-wrap">
+                        <!-- Step 1 -->
+                        <div class="process-wide-item" data-anim-fade-up>
+                            <div class="line"><div class="gradient-line-horizontal" data-anim-line></div></div>
+                            <div class="process-wide-item-content">
+                                <div class="badge-text process-wide-number">01</div>
+                                <div class="process-wide-item-text">
+                                    <div class="heading---h4">Ingestion & Triage</div>
+                                    <div class="text---lead">
+                                        Bank officer uploads a 12-page PDF. 
+                                        <span class="muted-text">
+                                            Instead of slow page-by-page OCR, our router sends the entire file to <strong>IBM's Docling</strong> for <strong>30x faster</strong> structural parsing and page splitting.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="process-wide-item" data-anim-fade-up>
+                            <div class="line"><div class="gradient-line-horizontal" data-anim-line></div></div>
+                            <div class="process-wide-item-content">
+                                <div class="badge-text process-wide-number">02</div>
+                                <div class="process-wide-item-text">
+                                    <div class="heading---h4">Specialist VLM Routing (The "Eyes")</div>
+                                    <div class="text---lead">
+                                        The router sends each page to the optimal VLM in parallel: 
+                                        <span class="muted-text">
+                                            <strong>Qwen2.5-VL</strong> reads the printed NID card barcode, 
+                                            <strong>Claude 3.5</strong> reads the handwritten declaration, and 
+                                            <strong>Nemotron Nano</strong> parses the financial statement table.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="process-wide-item" data-anim-fade-up>
+                            <div class="line"><div class="gradient-line-horizontal" data-anim-line></div></div>
+                            <div class="process-wide-item-content">
+                                <div class="badge-text process-wide-number">03</div>
+                                <div class="process-wide-item-text">
+                                    <div class="heading---h4">Bengali LLM Processing (The "Brain")</div>
+                                    <div class="text---lead">
+                                        All raw text is passed to the "Brain." 
+                                        <span class="muted-text">
+                                            <strong>TituLLM-3B</strong> parses the stated income "পঞ্চাশ হাজার টাকা" to 50000. 
+                                            <strong>BanglaBERT</strong> normalizes the applicant's name "মোঃ Karim আলী" for validation.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="process-wide-item" data-anim-fade-up>
+                            <div class="line"><div class="gradient-line-horizontal" data-anim-line></div></div>
+                            <div class="process-wide-item-content">
+                                <div class="badge-text process-wide-number">04</div>
+                                <div class="process-wide-item-text">
+                                    <div class="heading---h4">Cross-Validation & Fraud Check</div>
+                                    <div class="text---lead">
+                                        The <strong>Qwen3-235B</strong> reasoning engine performs the final check: 
+                                        <span class="muted-text">
+                                            Does AOF.name match NID.name? ✅ Is Age (from DOB) ≥ 18? ✅ Does Stated Income match the Financial Statement? <strong>⚠️ Flag: Anomaly Detected.</strong>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Step 5 (New) -->
+                        <div class="process-wide-item last" data-anim-fade-up>
+                            <div class="line"><div class="gradient-line-horizontal" data-anim-line></div></div>
+                            <div class="process-wide-item-content">
+                                <div class="badge-text process-wide-number">05</div>
+                                <div class="process-wide-item-text">
+                                    <div class="heading---h4">Final Output: Structured JSON</div>
+                                    <div class="text---lead">
+                                        A single, structured JSON is generated for the bank's core banking system. 
+                                        <span class="muted-text">
+                                            It contains all validated fields, confidence scores, and a clear fraud flag with an auditable explanation. <strong>Time: 15 seconds.</strong>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Page 3: Image Section -->
+        <section class="section padding-top-0" data-anim-fade-up>
+            <div class="main-container">
+                <div class="contained-image-block" data-anim-image-reveal>
+                    <div class="parallax-image-wrapper">
+                        <!-- IMAGE: Fixed Path (Placeholder) - IN ROOT -->
+                        <img src="https://via.placeholder.com/1920x960/1a1a1a/ffffff?text=Data+Flow+Pipeline+Diagram" 
+                             alt="M0NARQ Data Flow Pipeline Diagram" 
+                             class="image-fill parallax-image" 
+                             loading="lazy"
+                             sizes="(max-width: 1920px) 100vw, 1920px">
+                    </div>
+                    <!-- Re-purposed snippet block as a caption -->
+                    <div class="w-dyn-list" data-anim-fade-up>
+                        <div role="list" class="w-dyn-items">
+                            <div role="listitem" class="w-dyn-item">
+                                <a href="customers/bailey-klein.html" class="snippet-link w-inline-block">
+                                    <div id="w-node-_685ce4de-94a3-dd38-5c9f-5110a47088aa-87a111b0" class="snippet-image-wrap">
+                                        <!-- IMAGE: Fixed Path (Placeholder) - IN ROOT -->
+                                        <img src="https://via.placeholder.com/1536x864/1a1a1a/ffffff?text=Case+Study" 
+                                             loading="lazy" 
+                                             alt="AOF Form Processing Case Study" 
+                                             class="image-fill"
+                                             sizes="100vw"
+                                             srcset="https://via.placeholder.com/1536x864/1a1a1a/ffffff?text=Case+Study-p-500 500w, 
+                                                     https://via.placeholder.com/1536x864/1a1a1a/ffffff?text=Case+Study-p-800 800w, 
+                                                     https://via.placeholder.com/1536x864/1a1a1a/ffffff?text=Case+Study-p-1080 1080w, 
+                                                     https://via.placeholder.com/1536x864/1a1a1a/ffffff?text=Case+Study 1536w">
+                                    </div>
+                                    <div class="snippet-text-wrap">
+                                        <div class="heading---h5">An Auditable, Intelligent System.</div>
+                                        <div class="text---lead muted-text">
+                                            This entire process—replacing <strong>50 minutes</strong> of error-prone manual work—is completed in <strong>15 seconds</strong>.
+                                        </div>
+                                        <div class="arrow-link">
+                                            <div class="badge-text">read story</div>
+                                            <img src="68ec2c58efc0669e7ced14f4_interface-arrow-right-small-white-large.svg" alt="arrow right">
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section: The CPX-9 (Coil Section) -->
+        <section class="section" data-anim-fade-up>
+            <div class="main-container">
+                <div class="grid-section">
+                    <div class="grid-section-contents">
+                        <div gsap-target="light-path-parent" class="coil-wrapper">
+                            <div class="coil-logo">
+                                <div gsap-light-path-6-mobile="top-to-bottom-first" gsap-light-path-6-desktop="top-to-bottom-first" class="line left">
+                                    <div class="gradient-line-vertical"></div>
+                                </div>
+                                <div gsap-light-path-6-mobile="left-to-right-second" gsap-light-path-6-desktop="left-to-right-second" class="line bottom">
+                                    <div class="gradient-line-horizontal"></div>
+                                </div>
+                                <div class="dot south-east"></div>
+                                <div class="heading---h4">The M0NARQ Architecture</div>
+                            </div>
+                            <div class="coil-text">
+                                <div class="text---lead">
+                                    Document processing workflows often hide inefficiencies. 
+                                    <span class="muted-text">
+                                        M0NARQ captures small shifts in performance and output, making patterns visible before they become major failures.
+                                    </span>
+                                </div>
+                                <div gsap-light-path-6-mobile="top-to-bottom-third" gsap-light-path-6-desktop="top-to-bottom-third" class="line right">
+                                    <div class="gradient-line-vertical"></div>
+                                </div>
+                                <div gsap-light-path-6-mobile="right-to-left-fourth" gsap-light-path-6-desktop="right-to-left-fourth" class="line bottom">
+                                    <div class="gradient-line-horizontal"></div>
+                                </div>
+                            </div>
+                            <div class="coil-bottom icon-list">
+                                <div gsap-light-path-6-mobile="top-to-bottom-fifth" gsap-light-path-6-desktop="top-to-bottom-fifth" class="line left">
+                                    <div class="gradient-line-vertical"></div>
+                                </div>
+                                <div class="icon-horizontal-item bordered">
+                                    <img src="68edb96f8fe1bc5e96ff71a5_i-outgoing-data.svg" loading="lazy" alt="drift compatible icon" class="icon-horizontal-image">
+                                    <div class="badge-text icon-horizontal-text">drift compatible</div>
+                                </div>
+                                <div class="icon-horizontal-item bordered">
+                                    <img src="68edb96fe4de6fd9a8f7a5f3_i-nas.svg" loading="lazy" alt="closed-loop icon" class="icon-horizontal-image">
+                                    <div class="badge-text icon-horizontal-text">closed-loop</div>
+                                </div>
+                                <div class="icon-horizontal-item bordered">
+                                    <img src="68edb96fe96649b33f544a89_i-fuse-symbol.svg" loading="lazy" alt="variance detection icon" class="icon-horizontal-image">
+                                    <div class="badge-text icon-horizontal-text">variance detection</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="w-node-df96262d-cc3d-c353-f283-6d808f1dda77-87a111b0" data-w-id="df96262d-cc3d-c353-f283-6d808f1dda77" class="image-pair" data-anim-image-reveal>
+                        <div class="image-pair-small align-right">
+                            <div class="image-wrapper square-wrapper">
+                                <img src="https://via.placeholder.com/1280x1280/1a1a1a/ffffff?text=VLM+Processing" 
+                                     loading="lazy" 
+                                     alt="VLM Processing Pipeline" 
+                                     class="image-fill second"
+                                     sizes="(max-width: 1280px) 100vw, 1280px">
+                            </div>
+                        </div>
+                        <div class="image-pair-large">
+                            <div class="dot south-east"></div>
+                            <div class="image-wrapper square-wrapper">
+                                <img src="https://via.placeholder.com/1440x1440/1a1a1a/ffffff?text=LLM+Reasoning" 
+                                     loading="lazy" 
+                                     alt="LLM Reasoning Engine" 
+                                     class="image-fill first"
+                                     sizes="(max-width: 1440px) 100vw, 1440px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section: Clients -->
+        <section class="section" data-anim-fade-up>
+            <div class="main-container">
+                <div class="section-contents">
+                    <div class="heading---h2">Clients & Partners</div>
+                    <div class="client-grid-quarters">
+                        <div class="client-with-industry-wrap">
+                            <div class="client-industry-wrap">
+                                <div class="line"><div class="gradient-line-horizontal" data-anim-line></div></div>
+                                <div class="badge-text muted-text">banking</div>
+                            </div>
+                            <div class="client-logo-wrap">
+                                <img src="68ec2baa3b47ef24771ab513_client-bailey-klein.svg" alt="Bank Client Logo">
+                            </div>
+                        </div>
+                        <div class="client-with-industry-wrap">
+                            <div class="client-industry-wrap">
+                                <div class="line"><div class="gradient-line-horizontal" data-anim-line></div></div>
+                                <div class="badge-text muted-text">healthcare</div>
+                            </div>
+                            <div class="client-logo-wrap">
+                                <img src="68ec2baab3c5519681b68e3b_client-morance.svg" alt="Healthcare Client Logo">
+                            </div>
+                        </div>
+                        <div class="client-with-industry-wrap">
+                            <div class="client-industry-wrap">
+                                <div class="line"><div class="gradient-line-horizontal" data-anim-line></div></div>
+                                <div class="badge-text muted-text">government</div>
+                            </div>
+                            <div class="client-logo-wrap">
+                                <img src="68ec2baa0bfb345880991cfe_client-continuum.svg" alt="Government Client Logo">
+                            </div>
+                        </div>
+                        <div class="client-with-industry-wrap">
+                            <div class="client-industry-wrap">
+                                <div class="line"><div class="gradient-line-horizontal" data-anim-line></div></div>
+                                <div class="badge-text muted-text">insurance</div>
+                            </div>
+                            <div class="client-logo-wrap">
+                                <img src="68ec2baa24d64381d40330fb_client-prospect.svg" alt="Insurance Client Logo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Page 3: Final CTA -->
+        <section class="section padding-assymetrical-reversed" data-anim-fade-up>
+            <div class="main-container">
+                <div class="cta">
+                    <div class="heading---h2 cta-heading" data-anim-split-text>This is not OCR. This is Document Intelligence.</div>
+                    <p class="text---lead" data-anim-fade-up>
+                        We deliver a single, validated JSON with a confidence score and an auditable fraud flag. This eliminates human error and provides a level of risk detection impossible to achieve manually.
+                    </p>
+                    <div class="buttons">
+                        <a data-wf--button--variant="brand-color" 
+                           href="services-1.html" 
+                           class="button w-variant-ae197d1d-988a-11ef-37c4-d104a40294d7 w-inline-block" 
+                           data-anim-fade-up>
+                            <div class="button-icon-text-wrap">
+                                <div class="button-text">See Authoritative Tech Stack</div>
+                            </div>
+                            <div class="button-icon-wrap">
+                                <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" 
+                                     alt="arrow up right" 
+                                     class="button-icon">
+                                <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" 
+                                     alt="arrow up right" 
+                                     class="button-icon">
+                            </div>
+                            <div class="button-hover-element-wrap">
+                                <div class="button-hover-element"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Global Footer -->
+        <section class="footer">
+            <div class="main-container">
+                <div class="footer-top">
+                    <div id="w-node-ee88fee9-3337-a56d-0235-fbfe71c291e4-71c291e1" class="footer-logo-wrap">
+                        <a href="index.html" class="w-inline-block">
+                            <!-- LOGO: Fixed Path - IN ROOT -->
+                            <img src="68ec2baa30941d8fb5f2704f_hardware-logo.svg" 
+                                 alt="M0NARQ Logo" 
+                                 class="footer-logo">
+                        </a>
+                    </div>
+                    <!-- Footer Column 1: Navigation -->
+                    <div class="footer-column">
+                        <div class="footer-column-title">M0NARQ</div>
+                        <a href="index.html" class="footer-column-link">The Tk 32,000 Cr Problem</a>
+                        <a href="home-2.html" class="footer-column-link">Our "Two-Bucket" Solution</a>
+                        <a href="about-3.html" aria-current="page" class="footer-column-link w--current">The M0NARQ Pipeline</a>
+                        <a href="services-1.html" class="footer-column-link">Authoritative Tech Stack</a>
+                        <a href="services-2.html" class="footer-column-link">Competitive Analysis</a>
+                    </div>
+                    <!-- Footer Column 2: Navigation -->
+                    <div class="footer-column">
+                        <div class="footer-column-title">Investment</div>
+                        <a href="services-3.html" class="footer-column-link">The Tk 5,000 Cr Market</a>
+                        <a href="customers.html" class="footer-column-link">Proof: The 5-Cheque Demo</a>
+                        <a href="pricing.html" class="footer-column-link">The Financial Case (ROI)</a>
+                        <a href="about-1.html" class="footer-column-link">The Execution Plan & The Ask</a>
+                        <a href="contact.html" class="footer-column-link">Contact & Next Steps</a>
+                    </div>
+                    <!-- Footer Column 3: Contact -->
+                    <div class="footer-column">
+                        <div class="footer-column-title">Contact</div>
+                        <a href="mailto:info@samiulkarim.online" class="external-link w-inline-block">
+                            <div class="external-link-text">info@samiulkarim.online</div>
+                        </a>
+                        <a href="mailto:partnerships@samiulkarim.online" class="external-link w-inline-block">
+                            <div class="external-link-text">partnerships@samiulkarim.online</div>
+                        </a>
+                        <a href="mailto:sk@samiulkarim.online" class="external-link w-inline-block">
+                            <div class="external-link-text">sk@samiulkarim.online</div>
+                        </a>
+                        <a href="tel:+8801798344063" class="external-link w-inline-block">
+                            <div class="external-link-text">+880-1798344063</div>
+                        </a>
+                    </div>
+                    <!-- Footer Column 4: Social Media -->
+                    <div class="footer-column">
+                        <div class="footer-column-title">Connect</div>
+                        <div class="footer-social-wrap">
+                            <div class="social-link-wrap">
+                                <a data-wf--arrow-link--variant="monospaced-font" href="https://linkedin.com" target="_blank" class="external-link w-inline-block">
+                                    <div class="external-link-text w-variant-5e7d5569-86ec-ab3b-065b-b89172eb70cd">linkedin</div>
+                                    <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" alt="arrow up right" class="external-link-icon">
+                                </a>
+                            </div>
+                            <div class="social-link-wrap">
+                                <a data-wf--arrow-link--variant="monospaced-font" href="https://twitter.com" target="_blank" class="external-link w-inline-block">
+                                    <div class="external-link-text w-variant-5e7d5569-86ec-ab3b-065b-b89172eb70cd">X (Twitter)</div>
+                                    <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" alt="arrow up right" class="external-link-icon">
+                                </a>
+                            </div>
+                            <div class="social-link-wrap">
+                                <a data-wf--arrow-link--variant="monospaced-font" href="https://bsky.social" target="_blank" class="external-link w-inline-block">
+                                    <div class="external-link-text w-variant-5e7d5569-86ec-ab3b-065b-b89172eb70cd">bluesky</div>
+                                    <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" alt="arrow up right" class="external-link-icon">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="line">
+                    <div class="gradient-line-horizontal" data-anim-line></div>
+                </div>
+                <div class="main-container">
+                    <div class="footer-details">
+                        <div class="footer-copyright-wrap" style="width: 100%;">
+                            <div class="copyright-items">
+                                <div class="copyright-item">
+                                    <div class="text---small">
+                                        <span class="muted-text">© M0NARQ LLC. Registered in Delaware, USA.</span>
+                                    </div>
+                                </div>
+                                <div class="copyright-item">
+                                    <div class="text---small">
+                                        <span class="muted-text">Powered by </span><a href="https://webflow.com/" target="_blank" class="copyright-link">Webflow</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text---small muted-text">
+                                This document is confidential and intended solely for the recipient. All data is based on M0NARQ internal research and cited public sources. Projections are estimates and not guarantees of future performance.
+                            </div>
+                            <div class="dot footer-details-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Search Modal -->
+    <div class="search-modal-wrap">
+        <div class="search-modal-screen"></div>
+        <div class="search-modal-content">
+            <form action="search.html" class="search-modal-form w-form">
+                <input class="form-input w-input" maxlength="256" name="query" placeholder="Search…" type="search" id="search" required=""/>
+                <input type="submit" class="button search-modal-button w-button" value="Search"/>
+            </form>
+        </div>
+    </div>
+    <!-- Master JS -->
+    <script type="module" src="master.js"></script>
+</body>
+</html>
