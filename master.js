@@ -791,7 +791,7 @@ async function initPage() {
     animatePageHeadings();
     initScrollAnimations();
     initNavbar();
-    // initMenu(); // <-- MOVED to DOMContentLoaded
+    // initMenu(); // <-- MOVED
     initButtonHovers();
   });
 }
@@ -801,14 +801,14 @@ async function initPage() {
 // ============================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-  initMenu(); // <-- MOVED HERE: Runs immediately, no dependencies
+  initMenu(); // <-- MOVED HERE: Runs immediately
   setupPageTransitions();
   initPage();
 });
 
 // Pause Lenis when page hidden
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) {
+  if (_document.hidden) {
     lenis?.stop();
   } else {
     lenis?.start();
