@@ -16,11 +16,14 @@ document.body.classList.remove(‘loading’);
 }
 });
 
-import gsap from ‘https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js’;
-import ScrollTrigger from ‘https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js’;
-import SplitText from ‘https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/SplitText.min.js’;
-import Flip from ‘https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js’;
-import Lenis from ‘https://cdn.jsdelivr.net/npm/lenis@1.1.13/+esm’;
+// Import from local '/lib/' folder
+import { gsap } from './lib/gsap-core.js';
+import { ScrollTrigger } from './lib/ScrollTrigger.js';
+import { SplitText } from './lib/SplitText.js';
+import { Flip } from './lib/Flip.js';
+
+// Lenis uses a default export
+import Lenis from './lib/lenis.esm.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, Flip);
 
