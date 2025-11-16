@@ -1,0 +1,28 @@
+/* This file contains the @font-face rules to load the .ttf files you provided.
+  Link this CSS file in your HTML, or embed this content in a <style> tag.
+*/
+
+@font-face {
+  font-family: 'DM Mono';
+  src: url("68ec2695530c133f73f63d75_DMMono-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'BDO Grotesk';
+  src: url("68ec2695fd70f93bb49c7983_BDOGrotesk-VF.ttf") format("truetype");
+  font-weight: 300 900; /* This is a variable font */
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  src: url("68ec91e6d86f60bfd8c288cd_DMMono-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: block;
+}
+
