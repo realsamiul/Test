@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>M0NARQ - Competitive Analysis</title>
+    <!-- Meta Description -->
+    <meta content="A fact-based, data-driven comparison of M0NARQ vs. AWS Textract and Google DocAI, highlighting our 3.3x cost advantage and superior Bengali accuracy." name="description">
+    <!-- Open Graph Tags -->
+    <meta content="M0NARQ - Competitive Analysis" property="og:title">
+    <meta content="A fact-based, data-driven comparison of M0NARQ vs. AWS Textract and Google DocAI, highlighting our 3.3x cost advantage and superior Bengali accuracy." property="og:description">
+    <!-- Twitter Card Tags -->
+    <meta content="M0NARQ - Competitive Analysis" property="twitter:title">
+    <meta content="A fact-based, data-driven comparison of M0NARQ vs. AWS Textract and Google DocAI, highlighting our 3.3x cost advantage and superior Bengali accuracy." property="twitter:description">
+    <meta property="og:type" content="website">
+    <meta content="summary_large_image" name="twitter:card">
+    <!-- Viewport Meta -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" name="viewport">
+    <meta content="Webflow" name="generator">
+    <!-- LOCAL CSS - IN ROOT -->
+    <link href="hardware-technology-consulting-template.webflow.shared.93bb2e508.css" rel="stylesheet" type="text/css">
+    <!-- LOCAL FONTS - IN ROOT -->
+    <link href="fonts.css" rel="stylesheet" type="text/css">
+    <!-- Icons - IN ROOT -->
+    <link href="690016b2b45a367a37815563_favicon.png" rel="shortcut icon" type="image/x-icon">
+    <link href="690016b743eebae2ac50aeee_webclip.png" rel="apple-touch-icon">
+    <!-- === Optimizations (Phase 2) === -->
+    <!-- Preconnect to JS CDN -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#000000">
+    <!-- Optimizations & Animation Styles -->
+    <style>
+        /* Font smoothing */
+        body {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Split text styling */
+        .char {
+            display: inline-block;
+            transform-origin: bottom center;
+            will-change: transform, opacity;
+        }
+        .word {
+            display: inline-block;
+            white-space: nowrap;
+        }
+        /* Hero images start hidden */
+        .hero-bg {
+            opacity: 0;
+        }
+        /* Performance optimizations */
+        main, .hero-section, .button, .image-fill {
+            will-change: transform, opacity;
+        }
+        /* Mobile button sizing - Google standards (48px minimum) */
+        @media (max-width: 767px) {
+            .button {
+                min-height: 48px !important;
+                min-width: 48px !important;
+                padding: 14px 20px !important;
+                font-size: 16px !important; /* Prevents iOS zoom */
+            }
+            .menu-button {
+                min-width: 48px !important;
+                min-height: 48px !important;
+                padding: 12px !important;
+            }
+            /* Form inputs - prevent iOS zoom */
+            input, textarea, select {
+                font-size: 16px !important;
+            }
+            /* Touch-friendly links */
+            a:not(.w-nav-brand) { /* Exclude logo from min-height */
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+        }
+        /* Smooth transitions */
+        main, .hero-section {
+            transition: none;
+        }
+        /* Prevent layout shift */
+        img, .image-fill {
+            content-visibility: auto;
+        }
+        /* Mobile menu optimizations */
+        .navbar-menu {
+            -webkit-overflow-scrolling: touch;
+        }
+        /* Accessibility: Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        /* Search modal styling */
+        .search-modal-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+            display: none;
+        }
+        .search-modal-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .search-modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            background-color: #1a1a1a;
+            padding: 40px;
+            border-radius: 4px;
+        }
+        .search-modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            font-size: 18px;
+            background-color: #2d2d2d;
+            border: none;
+            color: white;
+            border-radius: 4px;
+        }
+        .search-modal-button {
+            background-color: #0c0c0c;
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .search-modal-button:hover {
+            background-color: #1a1a1a;
+        }
+    </style>
+</head>
+<body class="loading">
+    <!-- === Main Page Content === -->
+    <main class="main-content">
+        <!-- Global Navbar -->
+        <div data-w-id="3d7510a3-dfc6-473a-79bd-c26c6d7bf580" 
+             data-animation="default" 
+             data-collapse="medium" 
+             data-duration="400" 
+             data-easing="ease" 
+             data-easing2="ease" 
+             role="banner" 
+             class="navbar w-nav">
+            <div class="navbar-bg"></div>
+            <div class="main-container navbar-container">
+                <div class="navbar-row">
+                    <a href="index.html" class="nav-logo-link w-inline-block">
+                        <!-- LOGO: Fixed Path - IN ROOT -->
+                        <img src="68ec2baa30941d8fb5f2704f_hardware-logo.svg" 
+                             alt="M0NARQ Logo" 
+                             class="nav-logo">
+                    </a>
+                    <div class="navigation-wrap">
+                        <nav role="navigation" class="navbar-menu w-nav-menu">
+                            <div class="nav-links">
+                                <!-- Page 1 -->
+                                <div class="nav-link-wrap">
+                                    <a href="index.html" class="dropdown-link">The Tk 32,000 Cr Problem</a>
+                                </div>
+                                <!-- Page 2 -->
+                                <div class="nav-link-wrap">
+                                    <a href="home-2.html" class="dropdown-link">Our "Two-Bucket" Solution</a>
+                                </div>
+                                <!-- Page 3 -->
+                                <div class="nav-link-wrap">
+                                    <a href="about-3.html" class="dropdown-link">The M0NARQ Pipeline</a>
+                                </div>
+                                <!-- Page 4 -->
+                                <div class="nav-link-wrap">
+                                    <a href="services-1.html" class="dropdown-link">Authoritative Tech Stack</a>
+                                </div>
+                                <!-- Page 5 -->
+                                <div class="nav-link-wrap">
+                                    <a href="services-2.html" aria-current="page" class="dropdown-link w--current">Competitive Analysis</a>
+                                </div>
+                                <!-- Page 6 -->
+                                <div class="nav-link-wrap">
+                                    <a href="services-3.html" class="dropdown-link">The Tk 5,000 Cr Market</a>
+                                </div>
+                                <!-- Page 7 -->
+                                <div class="nav-link-wrap">
+                                    <a href="customers.html" class="dropdown-link">Proof: The 5-Cheque Demo</a>
+                                </div>
+                                <!-- Page 8 -->
+                                <div class="nav-link-wrap">
+                                    <a href="pricing.html" class="dropdown-link">The Financial Case (ROI)</a>
+                                </div>
+                                <!-- Page 9 -->
+                                <div class="nav-link-wrap">
+                                    <a href="about-1.html" class="dropdown-link">The Execution Plan & The Ask</a>
+                                </div>
+                                <!-- Page 10 -->
+                                <div class="nav-link-wrap">
+                                    <a href="contact.html" class="dropdown-link">Contact & Next Steps</a>
+                                </div>
+                            </div>
+                            <form action="search.html" class="navbar-menu-search w-form">
+                                <input class="form-input w-input" maxlength="256" name="query" placeholder="Search…" type="search" id="search-2" required=""/>
+                                <input type="submit" class="hide w-button" value="Search"/>
+                            </form>
+                            <div class="navbar-mobile-bg"></div>
+                        </nav>
+                    </div>
+                    <div class="navbar-right-contents">
+                        <div class="trigger-search">
+                            <div>Search</div>
+                        </div>
+                        <div class="menu-button w-nav-button">
+                            <div class="menu-button-icon-wrapper">
+                                <img src="68ec3bdc9428749e735f3dbd_interface-icon-menu.svg" 
+                                     alt="show menu" 
+                                     class="menu-button-icon">
+                                <img src="68ec3bdc038a532eb6cf33c0_interface-icon-cross.svg" 
+                                     alt="dismiss" 
+                                     class="menu-button-icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page 5: Hero -->
+        <section class="section title-hero padding-bottom-small">
+            <div class="main-container">
+                <div class="title-hero-content">
+                    <div class="grid-halves-section" style="opacity:0;" data-anim-fade-up>
+                        <h1 data-anim-split-text>
+                            <span class="text-span">A Fact-Based Takedown:</span> M0NARQ vs. The Monoliths.
+                        </h1>
+                        <div class="hero-content">
+                            <div class="heading---h5 hero-subheading" data-anim-fade-up>
+                                This is not a "better" product. 
+                                <span class="muted-text">
+                                    It is the *only* product that works for Bangladesh. Here is the data, comparing our specialized stack to the "one-size-fits-all" monolithic services from AWS and Google.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contained-image-block" data-anim-image-reveal>
+                        <div class="parallax-image-wrapper">
+                            <img src="https://via.placeholder.com/2400x1350/1a1a1a/ffffff?text=M0NARQ+vs+Competitors" 
+                                 loading="lazy" 
+                                 alt="Competitive Analysis Chart" 
+                                 class="image-fill parallax-image">
+                        </div>
+                        <div class="w-dyn-list">
+                            <div role="list" class="w-dyn-items">
+                                <div role="listitem" class="w-dyn-item">
+                                    <a href="#" class="snippet-link w-inline-block">
+                                        <div id="w-node-_9079c2fb-f408-e0a5-9845-3ce26f663f4b-ad1930b0" class="snippet-image-wrap">
+                                            <img src="https://via.placeholder.com/1536x864/1a1a1a/ffffff?text=Case+Study" 
+                                                 loading="lazy" 
+                                                 alt="Case Study Image" 
+                                                 class="image-fill">
+                                        </div>
+                                        <div class="snippet-text-wrap">
+                                            <div>How Bailey + Klein maintained strict compliance while cutting reporting overhead.</div>
+                                            <div class="arrow-link">
+                                                <div class="badge-text">read story</div>
+                                                <img src="68ec2c58efc0669e7ced14f4_interface-arrow-right-small-white-large.svg" 
+                                                     alt="arrow right">
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Page 5: Comparison Table -->
+        <section class="section title-top-section no-border" data-anim-fade-up>
+            <div class="main-container">
+                <div class="title-top-section">
+                    <div class="heading---h2" data-anim-split-text>A Head-to-Head Analysis: M0NARQ vs. The Competition</div>
+                    <div class="comparison-table">
+                        <!-- Table Header -->
+                        <div class="comparison-row header">
+                            <div class="text---lead">Factor</div>
+                            <div id="w-node-_8642c0cc-e975-66c0-a35d-d2fa866662ed-ad1930b0" class="text---lead">M0NARQ (Multi-Model)</div>
+                            <div id="w-node-_6cae0a2c-66c8-617e-d2be-c02859358fb5-ad1930b0" class="text---lead">Global Giants (Monolithic)</div>
+                        </div>
+                        <!-- Row 1: Printed Accuracy -->
+                        <div class="comparison-row body" data-anim-fade-up>
+                            <div class="line top" data-anim-line></div>
+                            <div id="w-node-_85b54483-d0f3-fc8c-294f-3057fa081627-ad1930b0" class="comparison-description">
+                                <div class="comparison-heading">Bengali Accuracy (Printed)</div>
+                            </div>
+                            <div class="heading---h4 comparison-point">97% (Qwen2.5-VL)</div>
+                            <div class="heading---h4 comparison-point muted-text">~85-90% (Google) / ~85% (AWS)</div>
+                        </div>
+                        <!-- Row 2: Handwritten Accuracy -->
+                        <div class="comparison-row body" data-anim-fade-up>
+                            <div class="line top" data-anim-line></div>
+                            <div id="w-node-d0df3b56-c5db-0279-52d3-91b4e8f395c1-ad1930b0" class="comparison-description">
+                                <div class="comparison-heading">Bengali Accuracy (Handwriting)</div>
+                            </div>
+                            <div class="heading---h4 comparison-point">92% (Claude 3.5 Specialist)</div>
+                            <div class="heading---h4 comparison-point muted-text">"Experimental" / ~70-75%</div>
+                        </div>
+                        <!-- Row 3: Bengali "Brain" -->
+                        <div class="comparison-row body" data-anim-fade-up>
+                            <div class="line top" data-anim-line></div>
+                            <div id="w-node-c2bd8b0d-8e7c-6100-ad0a-a64e7bbba701-ad1930b0" class="comparison-description">
+                                <div class="comparison-heading">Integrated Bengali LLM ("Brain")</div>
+                            </div>
+                            <div class="heading---h4 comparison-point">✅ Yes (Native TituLLM)</div>
+                            <div class="heading---h4 comparison-point muted-text">❌ No (Requires separate API/Build)</div>
+                        </div>
+                        <!-- Row 4: Cost -->
+                        <div class="comparison-row body" data-anim-fade-up>
+                            <div class="line top" data-anim-line></div>
+                            <div id="w-node-_9a4ca59f-609a-d6c4-0f2c-281b9c5beb69-ad1930b0" class="comparison-description">
+                                <div class="comparison-heading">Cost (per 10,000 docs)</div>
+                            </div>
+                            <div class="heading---h4 comparison-point">$6.00 (3.3x Cheaper)</div>
+                            <div class="heading---h4 comparison-point muted-text">$17.00 - $20.00</div>
+                        </div>
+                        <!-- Row 5: Data Sovereignty -->
+                        <div class="comparison-row small" data-anim-fade-up>
+                            <div class="line top" data-anim-line></div>
+                            <div id="w-node-_08f2a041-c548-a833-8af0-55e8bbf1683f-ad1930b0" class="comparison-heading">Data Sovereignty</div>
+                            <div class="text---lead comparison-point">✅ Yes (Bangladesh Servers)</div>
+                            <div class="text---lead muted-text comparison-point">❌ No (US Servers Only)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Page 5: "Their Weakness" Section -->
+        <section class="section padding-top-0" data-anim-fade-up>
+            <div class="main-container">
+                <div class="grid-halves-section">
+                    <div id="w-node-b3cb4d46-c459-aa46-8bbe-cef5048454e6-ad1930b0" class="grid-half-title">
+                        <div class="dot-title">
+                            <div class="dot inside-title"></div>
+                            <div class="badge-text">Our Strategic Moat</div>
+                        </div>
+                        <div class="grid-half-image">
+                            <div class="hide-on-mobile">
+                                <div class="dot south-west"></div>
+                                <div class="image-wrapper portrait-wrapper" data-anim-image-reveal>
+                                    <!-- IMAGE: Fixed Path (Placeholder) - IN ROOT -->
+                                    <img src="https://via.placeholder.com/1280x1706/1a1a1a/ffffff?text=Data+Sovereignty" 
+                                         alt="Data Sovereignty in Bangladesh" 
+                                         class="image-fill first" 
+                                         loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-half-content">
+                        <div class="heading---h4" data-anim-split-text>Their Weakness is Our Moat.</div>
+                        <div class="text---lead" data-anim-fade-up>
+                            Our global competitors are not just <strong>3.3x more expensive</strong>; they are <strong>regulatorily non-compliant</strong> for Bangladesh's core banking (BB SBS-2) and government data, which cannot leave the country. 
+                            <span class="muted-text">
+                                Their "one-size-fits-all" model is fundamentally broken for our market.
+                            </span>
+                        </div>
+                        <div class="buttons" style="margin-top: 24px;">
+                            <a data-wf--button--variant="base" 
+                               href="services-3.html" 
+                               class="button w-inline-block" 
+                               data-anim-fade-up>
+                                <div class="button-icon-text-wrap">
+                                    <div class="button-text">See The Market Opportunity</div>
+                                </div>
+                                <div class="button-icon-wrap">
+                                    <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" 
+                                         alt="arrow up right" 
+                                         class="button-icon">
+                                    <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" 
+                                         alt="arrow up right" 
+                                         class="button-icon">
+                                </div>
+                                <div class="button-hover-element-wrap">
+                                    <div class="button-hover-element"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section: The CPX-9 (Coil Section) -->
+        <section class="section" data-anim-fade-up>
+            <div class="main-container">
+                <div class="grid-section">
+                    <div class="grid-section-contents">
+                        <div gsap-target="light-path-parent" class="coil-wrapper">
+                            <div class="coil-logo">
+                                <div gsap-light-path-6-mobile="top-to-bottom-first" gsap-light-path-6-desktop="top-to-bottom-first" class="line left">
+                                    <div class="gradient-line-vertical"></div>
+                                </div>
+                                <div gsap-light-path-6-mobile="left-to-right-second" gsap-light-path-6-desktop="left-to-right-second" class="line bottom">
+                                    <div class="gradient-line-horizontal"></div>
+                                </div>
+                                <div class="dot south-east"></div>
+                                <div class="heading---h4">The Competitive Edge</div>
+                            </div>
+                            <div class="coil-text">
+                                <div class="text---lead">
+                                    Our multi-model architecture captures performance patterns before they become failures.
+                                    <span class="muted-text">
+                                        Unlike monolithic cloud providers, M0NARQ's specialized model routing ensures optimal accuracy while maintaining compliance.
+                                    </span>
+                                </div>
+                                <div gsap-light-path-6-mobile="top-to-bottom-third" gsap-light-path-6-desktop="top-to-bottom-third" class="line right">
+                                    <div class="gradient-line-vertical"></div>
+                                </div>
+                                <div gsap-light-path-6-mobile="right-to-left-fourth" gsap-light-path-6-desktop="right-to-left-fourth" class="line bottom">
+                                    <div class="gradient-line-horizontal"></div>
+                                </div>
+                            </div>
+                            <div class="coil-bottom icon-list">
+                                <div gsap-light-path-6-mobile="top-to-bottom-fifth" gsap-light-path-6-desktop="top-to-bottom-fifth" class="line left">
+                                    <div class="gradient-line-vertical"></div>
+                                </div>
+                                <div class="icon-horizontal-item bordered">
+                                    <img src="68edb96f8fe1bc5e96ff71a5_i-outgoing-data.svg" loading="lazy" alt="drift compatible icon" class="icon-horizontal-image">
+                                    <div class="badge-text icon-horizontal-text">drift compatible</div>
+                                </div>
+                                <div class="icon-horizontal-item bordered">
+                                    <img src="68edb96fe4de6fd9a8f7a5f3_i-nas.svg" loading="lazy" alt="closed-loop icon" class="icon-horizontal-image">
+                                    <div class="badge-text icon-horizontal-text">closed-loop</div>
+                                </div>
+                                <div class="icon-horizontal-item bordered">
+                                    <img src="68edb96fe96649b33f544a89_i-fuse-symbol.svg" loading="lazy" alt="variance detection icon" class="icon-horizontal-image">
+                                    <div class="badge-text icon-horizontal-text">variance detection</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="w-node-_921b166b-688a-7eb3-473c-492aef386e90-ad1930b0" 
+                         data-w-id="921b166b-688a-7eb3-473c-492aef386e90" 
+                         class="image-pair">
+                        <div class="image-pair-small align-right">
+                            <div class="image-wrapper portrait-wrapper">
+                                <img src="https://via.placeholder.com/1024x1365/1a1a1a/ffffff?text=AWS" 
+                                     loading="lazy" 
+                                     alt="AWS Comparison" 
+                                     class="image-fill second"
+                                     sizes="(max-width: 1024px) 100vw, 1024px"
+                                     srcset="https://via.placeholder.com/1024x1365/1a1a1a/ffffff?text=AWS-p-500 500w, 
+                                             https://via.placeholder.com/1024x1365/1a1a1a/ffffff?text=AWS-p-800 800w, 
+                                             https://via.placeholder.com/1024x1365/1a1a1a/ffffff?text=AWS 1024w">
+                            </div>
+                        </div>
+                        <div class="image-pair-large">
+                            <div class="dot north-east"></div>
+                            <div class="image-wrapper portrait-wrapper">
+                                <img src="https://via.placeholder.com/1280x1706/1a1a1a/ffffff?text=Google" 
+                                     loading="lazy" 
+                                     alt="Google Comparison" 
+                                     class="image-fill first"
+                                     sizes="(max-width: 1280px) 100vw, 1280px"
+                                     srcset="https://via.placeholder.com/1280x1706/1a1a1a/ffffff?text=Google-p-500 500w, 
+                                             https://via.placeholder.com/1280x1706/1a1a1a/ffffff?text=Google-p-800 800w, 
+                                             https://via.placeholder.com/1280x1706/1a1a1a/ffffff?text=Google-p-1080 1080w, 
+                                             https://via.placeholder.com/1280x1706/1a1a1a/ffffff?text=Google 1280w">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section: Testimonials -->
+        <section class="section padding-bottom-large" data-anim-fade-up>
+            <div class="main-container">
+                <div class="grid-halves-section">
+                    <div id="w-node-_8a17e52a-4260-e1f3-d034-a811ab79213a-ad1930b0" class="grid-half-title">
+                        <div class="dot-title">
+                            <div class="dot inside-title"></div>
+                            <div class="badge-text">customer stories</div>
+                        </div>
+                    </div>
+                    <div class="grid-half-content">
+                        <div data-delay="4000" 
+                             data-animation="slide" 
+                             class="testimonial-slider w-slider" 
+                             data-autoplay="false" 
+                             data-easing="ease" 
+                             data-hide-arrows="false" 
+                             data-disable-swipe="false" 
+                             data-autoplay-limit="0" 
+                             data-nav-spacing="9" 
+                             data-duration="500" 
+                             data-infinite="true">
+                            <div class="mask w-slider-mask">
+                                <div class="w-slide">
+                                    <div class="testimonial">
+                                        <div class="heading---h4">
+                                            "M0NARQ delivered accuracy where AWS and Google failed on our Bengali land deeds.
+                                            <span class="muted-text"> Their 92% handwritten recognition rate saved us months of manual work and potential customer disputes.</span>
+                                        </div>
+                                        <div class="badge-text">–Banking CIO, Top 3 Bangladesh Bank</div>
+                                    </div>
+                                </div>
+                                <div class="w-slide">
+                                    <div class="testimonial">
+                                        <div class="heading---h4">
+                                            "The cost savings were immediate - 3.3x cheaper per document than our previous solution.
+                                            <span class="muted-text"> But the real value was the auditable fraud flags that caught 5 potential cases in our first month.</span>
+                                        </div>
+                                        <div class="badge-text">–Operations Head, Insurance Provider</div>
+                                    </div>
+                                </div>
+                                <div class="w-slide">
+                                    <div class="testimonial">
+                                        <div class="heading---h4">
+                                            "Data sovereignty wasn't just a compliance checkbox for us, it was a strategic necessity.
+                                            <span class="muted-text"> M0NARQ is the only solution that keeps our sensitive customer data within Bangladesh's borders while delivering superior accuracy.</span>
+                                        </div>
+                                        <div class="badge-text">–CTO, Healthcare Network</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slide-button w-slider-arrow-left">
+                                <img alt="arrow right" 
+                                     src="68ec2c58e51d502c062c128f_interface-arrow-right-small-white.svg" 
+                                     class="slide-button-icon reverse">
+                            </div>
+                            <div class="slide-button next w-slider-arrow-right">
+                                <img alt="arrow right" 
+                                     src="68ec2c58e51d502c062c128f_interface-arrow-right-small-white.svg" 
+                                     class="slide-button-icon">
+                            </div>
+                            <div class="slide-nav w-slider-nav w-round"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Page 5: Final CTA -->
+        <section class="cta-section grid-bg" data-anim-fade-up>
+            <div class="main-container">
+                <div>
+                    <div class="cta-box">
+                        <div class="dot south-east"></div>
+                        <div class="dot north-west"></div>
+                        <div class="heading---h2" data-anim-split-text>A +12% Accuracy Gain. A +30% Handwriting Gain. A 3.3x Cost Advantage.</div>
+                        <p class="text---lead" 
+                           style="max-width: 800px; text-align: center; margin-top: 24px; opacity: 0.7;" 
+                           data-anim-fade-up>
+                            The data is clear. We are more accurate, specialized, and economical. We are the only platform that solves the non-negotiable data sovereignty problem. This is our unassailable advantage.
+                        </p>
+                        <div class="buttons" style="margin-top: 24px;">
+                            <a data-wf--button--variant="brand-color" 
+                               href="services-3.html" 
+                               class="button w-variant-ae197d1d-988a-11ef-37c4-d104a40294d7 w-inline-block">
+                                <div class="button-icon-text-wrap">
+                                    <div class="button-text">See The Market Opportunity</div>
+                                </div>
+                                <div class="button-icon-wrap">
+                                    <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" 
+                                         alt="arrow up right" 
+                                         class="button-icon">
+                                    <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" 
+                                         alt="arrow up right" 
+                                         class="button-icon">
+                                </div>
+                                <div class="button-hover-element-wrap">
+                                    <div class="button-hover-element"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-pattern"></div>
+        </section>
+        <!-- Global Footer -->
+        <section class="footer">
+            <div class="main-container">
+                <div class="footer-top">
+                    <div id="w-node-ee88fee9-3337-a56d-0235-fbfe71c291e4-71c291e1" class="footer-logo-wrap">
+                        <a href="index.html" class="w-inline-block">
+                            <!-- LOGO: Fixed Path - IN ROOT -->
+                            <img src="68ec2baa30941d8fb5f2704f_hardware-logo.svg" 
+                                 alt="M0NARQ Logo" 
+                                 class="footer-logo">
+                        </a>
+                    </div>
+                    <!-- Footer Column 1: Navigation -->
+                    <div class="footer-column">
+                        <div class="footer-column-title">M0NARQ</div>
+                        <a href="index.html" class="footer-column-link">The Tk 32,000 Cr Problem</a>
+                        <a href="home-2.html" class="footer-column-link">Our "Two-Bucket" Solution</a>
+                        <a href="about-3.html" class="footer-column-link">The M0NARQ Pipeline</a>
+                        <a href="services-1.html" class="footer-column-link">Authoritative Tech Stack</a>
+                        <a href="services-2.html" aria-current="page" class="footer-column-link w--current">Competitive Analysis</a>
+                    </div>
+                    <!-- Footer Column 2: Navigation -->
+                    <div class="footer-column">
+                        <div class="footer-column-title">Investment</div>
+                        <a href="services-3.html" class="footer-column-link">The Tk 5,000 Cr Market</a>
+                        <a href="customers.html" class="footer-column-link">Proof: The 5-Cheque Demo</a>
+                        <a href="pricing.html" class="footer-column-link">The Financial Case (ROI)</a>
+                        <a href="about-1.html" class="footer-column-link">The Execution Plan & The Ask</a>
+                        <a href="contact.html" class="footer-column-link">Contact & Next Steps</a>
+                    </div>
+                    <!-- Footer Column 3: Contact -->
+                    <div class="footer-column">
+                        <div class="footer-column-title">Contact</div>
+                        <a href="mailto:info@samiulkarim.online" class="external-link w-inline-block">
+                            <div class="external-link-text">info@samiulkarim.online</div>
+                        </a>
+                        <a href="mailto:partnerships@samiulkarim.online" class="external-link w-inline-block">
+                            <div class="external-link-text">partnerships@samiulkarim.online</div>
+                        </a>
+                        <a href="mailto:sk@samiulkarim.online" class="external-link w-inline-block">
+                            <div class="external-link-text">sk@samiulkarim.online</div>
+                        </a>
+                        <a href="tel:+8801798344063" class="external-link w-inline-block">
+                            <div class="external-link-text">+880-1798344063</div>
+                        </a>
+                    </div>
+                    <!-- Footer Column 4: Social Media -->
+                    <div class="footer-column">
+                        <div class="footer-column-title">Connect</div>
+                        <div class="footer-social-wrap">
+                            <div class="social-link-wrap">
+                                <a data-wf--arrow-link--variant="monospaced-font" href="https://linkedin.com" target="_blank" class="external-link w-inline-block">
+                                    <div class="external-link-text w-variant-5e7d5569-86ec-ab3b-065b-b89172eb70cd">linkedin</div>
+                                    <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" alt="arrow up right" class="external-link-icon">
+                                </a>
+                            </div>
+                            <div class="social-link-wrap">
+                                <a data-wf--arrow-link--variant="monospaced-font" href="https://twitter.com" target="_blank" class="external-link w-inline-block">
+                                    <div class="external-link-text w-variant-5e7d5569-86ec-ab3b-065b-b89172eb70cd">X (Twitter)</div>
+                                    <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" alt="arrow up right" class="external-link-icon">
+                                </a>
+                            </div>
+                            <div class="social-link-wrap">
+                                <a data-wf--arrow-link--variant="monospaced-font" href="https://bsky.social" target="_blank" class="external-link w-inline-block">
+                                    <div class="external-link-text w-variant-5e7d5569-86ec-ab3b-065b-b89172eb70cd">bluesky</div>
+                                    <img src="68ec2c587ddfb392769acc2e_interface-icon-arrow-up-right-white.svg" alt="arrow up right" class="external-link-icon">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="line">
+                    <div class="gradient-line-horizontal" data-anim-line></div>
+                </div>
+                <div class="main-container">
+                    <div class="footer-details">
+                        <div class="footer-copyright-wrap" style="width: 100%;">
+                            <div class="copyright-items">
+                                <div class="copyright-item">
+                                    <div class="text---small">
+                                        <span class="muted-text">© M0NARQ LLC. Registered in Delaware, USA.</span>
+                                    </div>
+                                </div>
+                                <div class="copyright-item">
+                                    <div class="text---small">
+                                        <span class="muted-text">Powered by </span><a href="https://webflow.com/" target="_blank" class="copyright-link">Webflow</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text---small muted-text">
+                                This document is confidential and intended solely for the recipient. All data is based on M0NARQ internal research and cited public sources. Projections are estimates and not guarantees of future performance.
+                            </div>
+                            <div class="dot footer-details-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Search Modal -->
+    <div class="search-modal-wrap">
+        <div class="search-modal-screen"></div>
+        <div class="search-modal-content">
+            <form action="search.html" class="search-modal-form w-form">
+                <input class="form-input w-input" maxlength="256" name="query" placeholder="Search…" type="search" id="search" required=""/>
+                <input type="submit" class="button search-modal-button w-button" value="Search"/>
+            </form>
+        </div>
+    </div>
+    <!-- Master JS -->
+    <script type="module" src="master.js"></script>
+</body>
+</html>
