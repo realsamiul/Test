@@ -6,6 +6,7 @@
  *   3) Fixed selector typos: replaced em-dash class names (— / \u2014) with the actual three-hyphen names used in the HTML (---).
  *   4) Ensures core animation inits (Lenis, ScrollTrigger animations, SplitText headings, hero entrance) run defensively.
  * - Added: initMenu function to handle navigation interactions previously managed by Webflow JS.
+ * - Updated: initMenu to use data-collapse attribute for breakpoint and add detailed logging.
  */
 
 window.addEventListener('error', (e) => {
@@ -63,53 +64,104 @@ const CONFIG = {
 // ============================================================================
 
 function initMenu() {
-  const nav = document.querySelector('.w-nav');
-  const menuButton = document.querySelector('.w-nav-button');
-  const menu = document.querySelector('.w-nav-menu');
-  const navOverlay = document.querySelector('.w-nav-overlay'); // Check for overlay style
-  const collapsePoint = getComputedStyle(nav).getPropertyValue('--_navbar-navbar-collapse-point') || '991.98px'; // Use CSS var or default
-  let isMobileView = window.innerWidth <= parseFloat(collapsePoint); // Initial state check
+  // Select elements using the exact class names from the HTML
+  const nav = document.querySelector('[data-collapse="medium"]'); // Use the data attribute for specificity
+  const menuButton = document.querySelector('.menu-button'); // Use the class name from the HTML
+  const menu = document.querySelector('.navbar-menu'); // Use the class name from the HTML
+  const navOverlay = document.querySelector('.w-nav-overlay'); // Check for overlay style container if present in HTML
+
+  // Determine collapse breakpoint based on data-collapse attribute
+  // Webflow often uses "medium" -> 991.98px, "small" -> 767.98px, "tiny" -> 479.98px
+  // Default to 991.98px if attribute is missing or unexpected
+  const collapseAttribute = nav?.getAttribute('data-collapse');
+  let collapsePoint = 992; // Default for "medium"
+  if (collapseAttribute === 'small') collapsePoint = 768;
+  if (collapseAttribute === 'tiny') collapsePoint = 480;
+  // Use the calculated point or a fallback
+  const breakpoint = `${collapsePoint - 0.02}px`; // e.g., "991.98px"
+
+  console.log(`initMenu: Looking for elements...`);
+  console.log(`  - nav (data-collapse="medium"):`, !!nav);
+  console.log(`  - menuButton (.menu-button):`, !!menuButton);
+  console.log(`  - menu (.navbar-menu):`, !!menu);
+  console.log(`  - navOverlay (.w-nav-overlay):`, !!navOverlay);
+  console.log(`  - Calculated breakpoint: ${breakpoint}`);
 
   if (!nav || !menuButton || !menu) {
-    console.warn('Navigation elements (.w-nav, .w-nav-button, .w-nav-menu) not found for initMenu');
+    console.warn('Navigation elements (nav with data-collapse, .menu-button, .navbar-menu) not found for initMenu');
     return;
   }
 
+  // Determine if currently in mobile view based on viewport width
+  function checkIsMobileView() {
+    return window.innerWidth <= (collapsePoint - 1); // e.g., <= 991 for medium
+  }
+
+  let isMobileView = checkIsMobileView();
+
   // Function to handle state changes
   function updateMenuState(isOpen) {
+    if (!isMobileView) {
+      console.log("updateMenuState: Not on mobile view, ignoring state change request.");
+      return; // Don't update state if not on mobile view
+    }
+
+    console.log(`updateMenuState: Setting menu state to ${isOpen ? 'OPEN' : 'CLOSED'}`);
     menuButton.classList.toggle('w--open', isOpen);
     // The menu itself might be controlled by CSS based on the button state or an overlay attribute
     // Option 1: Toggle class on menu (common Webflow pattern)
-    menu.classList.toggle('w--nav-menu-open', isOpen); // Add a custom class for styling if needed, or use .w--open
+    menu.classList.toggle('w--open', isOpen); // Use .w--open as per CSS rules
 
-    // Option 2: Toggle attribute on a parent, often the body or the nav itself, for overlay style
+    // Option 2: Toggle attribute on the main nav container for overlay style
     if (navOverlay) {
-       nav.setAttribute('data-nav-menu-open', isOpen ? 'true' : null); // Use attribute for overlay style
+       nav.setAttribute('data-nav-menu-open', isOpen ? 'true' : 'false'); // Use attribute for overlay style
+       // Also set on the menu itself if CSS requires it
+       menu.setAttribute('data-nav-menu-open', isOpen ? 'true' : 'false');
+    } else {
+        // If no overlay, just set attribute on nav or menu based on CSS needs
+        nav.setAttribute('data-nav-menu-open', isOpen ? 'true' : 'false');
+        menu.setAttribute('data-nav-menu-open', isOpen ? 'true' : 'false');
     }
-    // Option 3: Toggle attribute directly on menu if CSS uses [data-nav-menu-open] on the menu element
-    // menu.setAttribute('data-nav-menu-open', isOpen ? 'true' : null);
 
     // Ensure Lenis scrolling is disabled/enabled based on menu state (important for overlay menus)
     if (lenis) {
       if (isOpen) {
+        console.log("updateMenuState: Stopping Lenis");
         lenis.stop(); // Stop Lenis when menu is open (especially overlay)
       } else {
+        console.log("updateMenuState: Starting Lenis");
         lenis.start(); // Resume Lenis when menu closes
       }
     }
   }
 
+  // Initial state check on load
+  console.log(`initMenu: Initial mobile view state: ${isMobileView}`);
+
   // Click handler for the menu button
   menuButton.addEventListener('click', (e) => {
+    console.log("Menu button clicked!");
+    // Re-check mobile state on click in case it changed since load/init
+    isMobileView = checkIsMobileView();
+    console.log(`Menu button click: Current mobile view state: ${isMobileView}`);
+
+    if (!isMobileView) {
+        console.log("Menu button click: Not on mobile view, ignoring click.");
+        return; // Ignore click if not on mobile view
+    }
+
     e.preventDefault(); // Prevent default button behavior if needed
     const isOpen = menuButton.classList.contains('w--open');
+    console.log(`Menu button click: Current open state: ${isOpen}`);
     updateMenuState(!isOpen);
   });
 
   // Close menu when clicking a link inside it (common UX)
-  menu.querySelectorAll('a.w-nav-link').forEach(link => {
-    link.addEventListener('click', () => {
+  menu.querySelectorAll('a.w-nav-link, a.dropdown-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      console.log("Nav link clicked inside menu.");
       if (isMobileView) { // Only close on mobile/tablet views where it's likely a dropdown/overlay
+        console.log("Nav link click: Closing menu as it's mobile view.");
         updateMenuState(false);
       }
     });
@@ -117,26 +169,34 @@ function initMenu() {
 
   // Close menu when clicking outside the navigation area (overlay style or dropdown)
   document.addEventListener('click', (e) => {
+    // Re-check mobile state on click
+    const currentIsMobileView = checkIsMobileView();
     if (
-      isMobileView && // Only relevant on mobile view
+      currentIsMobileView && // Only relevant on mobile view
+      nav && // Ensure nav exists
       !nav.contains(e.target) && // Click was outside the nav container
+      menuButton && // Ensure button exists
       menuButton.classList.contains('w--open') // Menu is currently open
     ) {
-      updateMenuState(false);
+        console.log("Document click outside nav detected, closing menu.");
+        updateMenuState(false);
     }
   });
 
-  // Optional: Close menu on resize if switching from mobile to desktop view
+  // Handle resize to update mobile state and potentially close menu
   window.addEventListener('resize', () => {
-    const newIsMobileView = window.innerWidth <= parseFloat(collapsePoint);
+    const newIsMobileView = checkIsMobileView();
+    console.log(`Window resize: Previous mobile state: ${isMobileView}, New mobile state: ${newIsMobileView}`);
+
     if (isMobileView && !newIsMobileView && menuButton.classList.contains('w--open')) {
       // Went from mobile to desktop, close the menu if it was open
+      console.log("Resize: Switched from mobile to desktop, closing menu.");
       updateMenuState(false);
     }
     isMobileView = newIsMobileView; // Update state variable
   });
 
-  console.log("initMenu: Navigation initialized.");
+  console.log("initMenu: Navigation initialized successfully.");
 }
 
 // ============================================================================
