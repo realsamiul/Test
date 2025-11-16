@@ -226,6 +226,91 @@
                             </form>
                             <div class="navbar-mobile-bg"></div>
                         </nav>
+                        <!-- Place this script block RIGHT AFTER the closing </nav> tag of your navbar in index.html -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    console.log("Standalone Nav Script: DOM loaded, attempting to initialize navigation.");
+
+    // Use the specific selectors from your HTML
+    const navContainer = document.querySelector('[data-collapse="medium"]'); // The main nav element
+    const menuButton = document.querySelector('.menu-button'); // The hamburger button
+    const menu = document.querySelector('.navbar-menu'); // The menu links container
+
+    console.log("Standalone Nav Script: Elements found - nav:", !!navContainer, "button:", !!menuButton, "menu:", !!menu);
+
+    if (!navContainer || !menuButton || !menu) {
+      console.error("Standalone Nav Script: Could not find required navigation elements (.menu-button, .navbar-menu, [data-collapse='medium']).");
+      return; // Stop if elements are missing
+    }
+
+    // Determine the breakpoint based on data-collapse attribute
+    const collapseAttribute = navContainer.getAttribute('data-collapse');
+    let collapsePoint = 992; // Default for "medium"
+    if (collapseAttribute === 'small') collapsePoint = 768;
+    if (collapseAttribute === 'tiny') collapsePoint = 480;
+    const breakpoint = collapsePoint - 1; // e.g., 991
+
+    function isMobileView() {
+        return window.innerWidth <= breakpoint;
+    }
+
+    // Toggle function
+    function toggleMenu() {
+        console.log("Standalone Nav Script: Toggle menu requested.");
+        if (!isMobileView()) {
+            console.log("Standalone Nav Script: Not on mobile view, ignoring toggle.");
+            return; // Only allow toggle on mobile view
+        }
+
+        const isOpen = menu.classList.contains('w--open');
+        console.log("Standalone Nav Script: Current menu state (w--open):", isOpen);
+
+        if (isOpen) {
+            menu.classList.remove('w--open');
+            menuButton.classList.remove('w--open');
+            // Remove attribute if CSS relies on it
+            navContainer.setAttribute('data-nav-menu-open', 'false');
+            menu.setAttribute('data-nav-menu-open', 'false');
+            console.log("Standalone Nav Script: Menu closed.");
+        } else {
+            menu.classList.add('w--open');
+            menuButton.classList.add('w--open');
+            // Add attribute if CSS relies on it
+            navContainer.setAttribute('data-nav-menu-open', 'true');
+            menu.setAttribute('data-nav-menu-open', 'true');
+            console.log("Standalone Nav Script: Menu opened.");
+        }
+    }
+
+    // Add click listener to the button
+    menuButton.addEventListener('click', function(e) {
+        console.log("Standalone Nav Script: Hamburger button clicked!");
+        e.preventDefault(); // Prevent default button behavior
+        toggleMenu();
+    });
+
+    // Add click listener to close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (isMobileView() && !navContainer.contains(e.target) && menu.classList.contains('w--open')) {
+            console.log("Standalone Nav Script: Clicked outside menu, closing.");
+            toggleMenu(); // Close the menu
+        }
+    });
+
+    // Add resize listener to close menu if switching from mobile to desktop
+    window.addEventListener('resize', function() {
+        if (!isMobileView() && menu.classList.contains('w--open')) {
+            console.log("Standalone Nav Script: Switched from mobile to desktop view, closing menu.");
+            menu.classList.remove('w--open');
+            menuButton.classList.remove('w--open');
+            navContainer.setAttribute('data-nav-menu-open', 'false');
+            menu.setAttribute('data-nav-menu-open', 'false');
+        }
+    });
+
+    console.log("Standalone Nav Script: Navigation initialization complete.");
+  });
+</script>
                     </div>
                     <div class="navbar-right-contents">
                         <div class="trigger-search">
